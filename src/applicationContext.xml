@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">  
+<!-- basic bean -->
+<bean id="studentbean" class="com.kpit.spring.bean.Student">  
+<property name="name" value="Swati Vijayvergiya"></property>  
+</bean>  
+
+<!-- bean for basic constructor Injection with Dependent Objects-->
+<bean id="Address1" class="com.kpit.spring.bean.Address">  
+<constructor-arg value="Pune" ></constructor-arg> 
+<constructor-arg value="Maharashtra"></constructor-arg> 
+<constructor-arg value="India"></constructor-arg>  
+</bean> 
+
+<bean id="Address2" class="com.kpit.spring.bean.Address">  
+<constructor-arg value="Indore" ></constructor-arg> 
+<constructor-arg value="MP"></constructor-arg> 
+<constructor-arg value="India"></constructor-arg>  
+</bean> 
+
+<!-- bean for constructor Injection with dependent Objects-->
+<bean id="constructorDI" class="com.kpit.spring.bean.Student">  
+<constructor-arg value="Swati" ></constructor-arg> 
+<constructor-arg >
+<ref bean="Address1"></ref>
+</constructor-arg>  
+</bean>  
+
+<!-- bean for constructor Injection with collections (list)-->
+<bean id="constructorDIwithCollections" class="com.kpit.spring.bean.Student">  
+<constructor-arg value="Swati" ></constructor-arg> 
+<constructor-arg >
+<ref bean="Address1"></ref>
+</constructor-arg> 
+<constructor-arg>
+<list>
+<value>C++</value>
+<value>java</value>
+<value>.Net</value>
+</list>
+</constructor-arg>  
+</bean> 
+
+<!-- bean for Teacher class-->
+<bean id="teacher1" class="com.kpit.spring.bean.Teachers">  
+<constructor-arg value="Snehal" ></constructor-arg> 
+<constructor-arg value="java"></constructor-arg>
+</bean>
+
+<!-- bean for Teacher class-->
+<bean id="teacher2" class="com.kpit.spring.bean.Teachers">  
+<constructor-arg value="Gaurav" ></constructor-arg> 
+<constructor-arg value="Database"></constructor-arg>
+</bean>
+
+
+<!-- bean for constructor Injection with collections (list)-->
+<bean id="constructorDIwithNonStringCollections" class="com.kpit.spring.bean.Student">  
+<constructor-arg value="Swati" ></constructor-arg> 
+<constructor-arg >
+<ref bean="Address1"></ref>
+</constructor-arg> 
+<constructor-arg>
+<list>
+<value>C++</value>
+<value>java</value>
+<value>.Net</value>
+</list>
+</constructor-arg>  
+<constructor-arg>
+<list>
+<ref bean="teacher1"></ref>
+<ref bean="teacher2"></ref>
+</list>
+</constructor-arg>  
+</bean> 
+
+<!-- bean for constructor Injection with Map-->
+<bean id="constructorDIwithMAP" class="com.kpit.spring.bean.Student">  
+<constructor-arg value="Swati" ></constructor-arg> 
+<constructor-arg >
+<ref bean="Address1"></ref>
+</constructor-arg> 
+<constructor-arg>
+<list>
+<value>C++</value>
+<value>java</value>
+<value>.Net</value>
+</list>
+</constructor-arg>  
+<constructor-arg>
+<list>
+<ref bean="teacher1"></ref>
+<ref bean="teacher2"></ref>
+</list>
+</constructor-arg>
+<constructor-arg> 
+<map>
+<entry key="gaurav" value="Database"></entry>
+<entry key="snehal" value="Java"></entry>
+</map>
+</constructor-arg>  
+</bean> 
+
+<!-- bean for constructor Injection with Non String Map and also parent attribute-->
+<bean id="constructorDIwithNonStringMAP" class="com.kpit.spring.bean.Student" parent="constructorDIwithMAP">  
+<constructor-arg> 
+<map>
+<entry key-ref="teacher1" value-ref="Address1"></entry>
+<entry key-ref="teacher2" value-ref="Address2"></entry>
+</map>
+</constructor-arg>  
+</bean> 
+
+</beans>
